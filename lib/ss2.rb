@@ -147,7 +147,7 @@ module Ss2
 				$ShieldsquareResponse_responsecode = $ShieldsquareCodes_ALLOW_EXP
 				$ShieldsquareResponse_reason = shieldsquareCurlResponseCode['output']
 			else
-				shieldsquareResponse_from_ss = JSON.parse(shieldsquareCurlResponseCode['output'])
+				shieldsquareResponse_from_ss = JSON.parse(shieldsquareCurlResponseCode)
 				$ShieldsquareResponse_dynamic_JS = shieldsquareResponse_from_ss['dynamic_JS']
 				n=shieldsquareResponse_from_ss['ssresp'].to_i
 				if n==0
