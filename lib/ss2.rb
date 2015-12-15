@@ -143,7 +143,7 @@ module Ss2
 
 		if @@mode == 'Active'
 			shieldsquareCurlResponseCode=shieldsquare_post_sync shieldsquare_service_url, my_hash,@@timeout_value
-			if shieldsquareCurlResponseCode['response'] != 200
+			if shieldsquareCurlResponseCode.code != 200
 				$ShieldsquareResponse_responsecode = $ShieldsquareCodes_ALLOW_EXP
 				$ShieldsquareResponse_reason = shieldsquareCurlResponseCode['output']
 			else
@@ -178,7 +178,7 @@ module Ss2
 				end
 			else
 				syncresponse=shieldsquare_post_sync shieldsquare_service_url, my_hash,@@timeout_value
-				if syncresponse['response'] != 200
+				if syncresponse.code != 200
 					$ShieldsquareResponse_responsecode = $ShieldsquareCodes_ALLOW_EXP
 					$ShieldsquareResponse_reason = syncresponse['output']
 				else
