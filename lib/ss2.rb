@@ -207,7 +207,7 @@ module Ss2
 		params=payload
 		headers = Hash['Content-Type'=>'application/json', 'Accept'=>'application/json']
 		begin
-			response = HTTParty.post(url.to_s, :query => params,:headers => headers, :timeout => timeout)
+			response = HTTParty.post(url.to_s, :body => params.to_json,:headers => headers, :timeout => timeout)
 		rescue Exception => e
 			response=Hash["response"=>0,"output"=>"Request Timed Out/Server Not Reachable"]
 		end
