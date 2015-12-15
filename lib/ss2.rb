@@ -205,11 +205,9 @@ module Ss2
 	def self.shieldsquare_post_sync(url, payload, timeout)
 		# Sendind the Data to the ShieldSquare Server
 		params=payload
-		headers={}
-		headers['Content-Type']='application/json'
-		headers['Accept']='application/json'
+		headers = Hash['Content-Type'=>'application/json', 'Accept'=>'application/json']
 		begin
-			response = HTTParty.post(url, :query => params,:headers => headers, :timeout => timeout)
+			response = HTTParty.post(url.to_s, :query => params,:headers => headers, :timeout => timeout)
 		rescue Exception => e
 			response=Hash["response"=>0,"output"=>"Request Timed Out/Server Not Reachable"]
 		end
