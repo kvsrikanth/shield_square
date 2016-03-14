@@ -143,9 +143,9 @@ module Ss2
 
 		if @@mode == 'Active'
 			shieldsquareCurlResponseCode=shieldsquare_post_sync shieldsquare_service_url, my_hash,@@timeout_value
-			if shieldsquareCurlResponseCode.code != 200
+			if shieldsquareCurlResponseCode.blank?
 				$ShieldsquareResponse_responsecode = $ShieldsquareCodes_ALLOW_EXP
-				$ShieldsquareResponse_reason = shieldsquareCurlResponseCode['output']
+				$ShieldsquareResponse_reason = "Request Timed Out/Server Not Reachable"
 			else
 				shieldsquareResponse_from_ss = JSON.parse(shieldsquareCurlResponseCode)
 				$ShieldsquareResponse_dynamic_JS = shieldsquareResponse_from_ss['dynamic_JS']
@@ -178,9 +178,9 @@ module Ss2
 				end
 			else
 				syncresponse=shieldsquare_post_sync shieldsquare_service_url, my_hash,@@timeout_value
-				if syncresponse.code != 200
+				if shieldsquareCurlResponseCode.blank?
 					$ShieldsquareResponse_responsecode = $ShieldsquareCodes_ALLOW_EXP
-					$ShieldsquareResponse_reason = syncresponse['output']
+					$ShieldsquareResponse_reason = "Request Timed Out/Server Not Reachable"
 				else
 					$ShieldsquareResponse_responsecode = $ShieldsquareCodes_ALLOW
 				end
@@ -209,7 +209,7 @@ module Ss2
 		begin
 			response = HTTParty.post(url.to_s, :body => params.to_json,:headers => headers, :timeout => timeout)
 		rescue Exception => e
-			response=Hash["response"=>0,"output"=>"Request Timed Out/Server Not Reachable"]
+			response=nil
 		end
 		return response
 	end
