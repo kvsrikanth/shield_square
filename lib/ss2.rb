@@ -197,8 +197,7 @@ module Ss2
 		cmd = 'curl -X POST  -H "Accept: Application/json" -H "Content-Type: application/json" -m '+ timeout + ' ' + url + " -d '"+ CGI::escape(payload) + "'"
 		output=`#{cmd}`
 
-		result = $?.success?
-		response=Hash["response"=>result,"output"=>output]
+		response=Hash["response"=>true,"output"=>output]
 		return response
 	end	
 
