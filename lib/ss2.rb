@@ -71,7 +71,7 @@ module Ss2
 		shieldsquare_service_url = "http://" + @@ss2_domain + "/getRequestData"
 		$IP_ADDRESS = request.remote_ip
 
-		if @@timeout_value > 1000
+		if @@timeout_value > 2000
 			puts "Content-type: text/html"
 			puts ''
 			puts 'ShieldSquare Timeout cant be greater then 1000 Milli seconds'
@@ -127,7 +127,11 @@ module Ss2
 		end
 		$ShieldsquareRequest_zpsbd1 = @@sid
 		$ShieldsquareRequest_zpsbd2 = shieldsquare_pid
-		$ShieldsquareRequest_zpsbd3 = request.headers['HTTP_REFERER']
+		$ShieldsquareRequest_zpsbd3 = if request.headers['HTTP_REFERER'] && !request.headers['HTTP_REFERER'].blank? 
+			request.headers['HTTP_REFERER']
+		else
+			""
+		end
 		$ShieldsquareRequest_zpsbd4 = request.headers['REQUEST_URI']
 		$ShieldsquareRequest_zpsbd5 = request.session_options[:id]
 		$ShieldsquareRequest_zpsbd6 = $IP_ADDRESS
