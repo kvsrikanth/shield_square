@@ -69,6 +69,7 @@ module Ss2
 		shieldsquare_e = 5
 		shieldsquare_f = 10
 		shieldsquare_service_url = "http://" + @@ss2_domain + "/getRequestData"
+		shieldsquare_current_time = Time.now.to_i
 		$IP_ADDRESS = request.remote_ip
 
 		if @@timeout_value > 2000
@@ -91,35 +92,31 @@ module Ss2
 		end
 		
 		if cookies['__uzma']!="" and (cookies['__uzma'].to_s).length > 3
-			shieldsquare_lastaccesstime =  cookies['__uzmd']
 			shieldsquare_uzmc=0
 			shieldsquare_uzmc= cookies['__uzmc']
 			shieldsquare_uzmc=shieldsquare_uzmc[shieldsquare_e..shieldsquare_e+1]
 			shieldsquare_a = ((shieldsquare_uzmc.to_i-shieldsquare_c)/shieldsquare_b) + shieldsquare_d
 			shieldsquare_uzmc= rand(shieldsquare_low..shieldsquare_high).to_s + (shieldsquare_c+shieldsquare_a*shieldsquare_b).to_s + rand(shieldsquare_low..shieldsquare_high).to_s
 			cookies[:__uzmc] = { :value => shieldsquare_uzmc, :expires => Time.now + 3600*24*365*10} 
-			cookies[:__uzmd] = { :value => Time.now.to_i.to_s, :expires => Time.now + 3600*24*365*10} 
 			$ShieldsquareRequest__uzma = cookies["__uzma"]
 			$ShieldsquareRequest__uzmb = cookies["__uzmb"]
 			$ShieldsquareRequest__uzmc = shieldsquare_uzmc
-			$ShieldsquareRequest__uzmd = shieldsquare_lastaccesstime
 		
 		else
 
 			id = DateTime.now.strftime('%Q')# Get current date to the milliseconds
 			# Reverse it
 			shieldsquare_uzma = id.to_i(36).to_s
-			shieldsquare_lastaccesstime = Time.now.to_i
 			shieldsquare_uzmc= rand(shieldsquare_low..shieldsquare_high).to_s + (shieldsquare_c+shieldsquare_a*shieldsquare_b).to_s + rand(shieldsquare_low..shieldsquare_high).to_s
 			cookies[:__uzma] = { :value => shieldsquare_uzma, :expires => Time.now + 3600*24*365*10} 
 			cookies[:__uzmb] = { :value => Time.now.to_i.to_s, :expires => Time.now + 3600*24*365*10} 
 			cookies[:__uzmc] = { :value => shieldsquare_uzmc, :expires => Time.now + 3600*24*365*10} 
-			cookies[:__uzmd] = { :value => Time.now.to_i.to_s, :expires => Time.now + 3600*24*365*10} 
 			$ShieldsquareRequest__uzma = shieldsquare_uzma
 			$ShieldsquareRequest__uzmb = Time.now.to_i
 			$ShieldsquareRequest__uzmc = shieldsquare_uzmc
-			$ShieldsquareRequest__uzmd = shieldsquare_lastaccesstime
 		end
+		cookies[:__uzmd] = { :value => shieldsquare_current_time.to_s, :expires => Time.now + 3600*24*365*10} 
+		$ShieldsquareRequest__uzmd = shieldsquare_current_time
 		if @@mode == 'Active'
 			$ShieldsquareRequest_zpsbd0 = true;
 		else
@@ -138,9 +135,8 @@ module Ss2
 		$ShieldsquareRequest_zpsbd7 = request.headers['HTTP_USER_AGENT']
 		$ShieldsquareRequest_zpsbd8 = shieldsquare_calltype
 		$ShieldsquareRequest_zpsbd9 = shieldsquare_username
-		$ShieldsquareRequest_zpsbda = Time.now.to_i
+		$ShieldsquareRequest_zpsbda = shieldsquare_current_time
 		my_hash = {:_zpsbd0 => $ShieldsquareRequest_zpsbd0,:_zpsbd1 => $ShieldsquareRequest_zpsbd1,:_zpsbd2 => $ShieldsquareRequest_zpsbd2,:_zpsbd3 => $ShieldsquareRequest_zpsbd3,:_zpsbd4 => $ShieldsquareRequest_zpsbd4,:_zpsbd5 => $ShieldsquareRequest_zpsbd5,:_zpsbd6 => $ShieldsquareRequest_zpsbd6,:_zpsbd7 => $ShieldsquareRequest_zpsbd7,:_zpsbd8 => $ShieldsquareRequest_zpsbd8,:_zpsbd9 => $ShieldsquareRequest_zpsbd9,:_zpsbda => $ShieldsquareRequest_zpsbda,:__uzma => $ShieldsquareRequest__uzma,:__uzmb => $ShieldsquareRequest__uzmb,:__uzmc => $ShieldsquareRequest__uzmc,:__uzmd => $ShieldsquareRequest__uzmd }
-
 		shieldsquare_json_obj = JSON.generate(my_hash)
 		$ShieldsquareResponse_pid = shieldsquare_pid
 		$ShieldsquareResponse_url = @@js_url
