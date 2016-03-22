@@ -206,7 +206,6 @@ module Ss2
 		end
 		begin
 			response = HTTParty.post(url.to_s, :body => params.to_json,:headers => headers, :timeout => timeout)
-			response = nil
 			if response.code != 200
 				response = nil
 			end
