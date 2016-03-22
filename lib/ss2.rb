@@ -162,7 +162,7 @@ module Ss2
 					$ShieldsquareResponse_responsecode = $ShieldsquareCodes_FFD
 				else
 					$ShieldsquareResponse_responsecode = $ShieldsquareCodes_ALLOW_EXP
-					$ShieldsquareResponse_reason = shieldsquareCurlResponseCode['output']
+					$ShieldsquareResponse_reason = "Request Timed Out/Server Not Reachable"
 				end 
 			end
 
