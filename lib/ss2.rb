@@ -173,7 +173,7 @@ module Ss2
 				$ShieldsquareResponse_responsecode = $ShieldsquareCodes_ALLOW
 			else
 				syncresponse=shieldsquare_post_sync shieldsquare_service_url, my_hash,@@timeout_value
-				if shieldsquareCurlResponseCode.blank?
+				if syncresponse.blank?
 					$ShieldsquareResponse_responsecode = $ShieldsquareCodes_ALLOW_EXP
 					$ShieldsquareResponse_reason = "Request Timed Out/Server Not Reachable"
 				else
