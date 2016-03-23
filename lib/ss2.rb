@@ -169,10 +169,10 @@ module Ss2
 		else
 			
 			if @@async_http_post == true
-				asyncresponse=shieldsquare_post_async shieldsquare_service_url, shieldsquare_json_obj,@@timeout_value.to_s
+				asyncresponse=shieldsquare_post_async shieldsquare_service_url, my_hash,@@timeout_value.to_s
 				$ShieldsquareResponse_responsecode = $ShieldsquareCodes_ALLOW
 			else
-				syncresponse=shieldsquare_post_sync shieldsquare_service_url, my_hash,@@timeout_value
+				syncresponse=shieldsquare_post_sync shieldsquare_service_url, my_hash,@@timeout_value.to_s
 				if syncresponse.blank?
 					$ShieldsquareResponse_responsecode = $ShieldsquareCodes_ALLOW_EXP
 					$ShieldsquareResponse_reason = "Request Timed Out/Server Not Reachable"
