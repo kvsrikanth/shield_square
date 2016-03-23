@@ -70,6 +70,7 @@ module Ss2
 		shieldsquare_f = 10
 		shieldsquare_service_url = "http://" + @@ss2_domain + "/getRequestData"
 		shieldsquare_current_time = Time.now.to_i
+		$ShieldsquareResponse_reason = ""
 		$IP_ADDRESS = request.remote_ip
 
 		if @@timeout_value > 2000
