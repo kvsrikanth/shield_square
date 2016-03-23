@@ -112,11 +112,11 @@ module Ss2
 			cookies[:__uzmb] = { :value => Time.now.to_i.to_s, :expires => Time.now + 3600*24*365*10} 
 			cookies[:__uzmc] = { :value => shieldsquare_uzmc, :expires => Time.now + 3600*24*365*10} 
 			$ShieldsquareRequest__uzma = shieldsquare_uzma
-			$ShieldsquareRequest__uzmb = Time.now.to_i
+			$ShieldsquareRequest__uzmb = Time.now.to_i.to_s
 			$ShieldsquareRequest__uzmc = shieldsquare_uzmc
 		end
 		cookies[:__uzmd] = { :value => shieldsquare_current_time.to_s, :expires => Time.now + 3600*24*365*10} 
-		$ShieldsquareRequest__uzmd = shieldsquare_current_time
+		$ShieldsquareRequest__uzmd = shieldsquare_current_time.to_s
 		if @@mode == 'Active'
 			$ShieldsquareRequest_zpsbd0 = true;
 		else
