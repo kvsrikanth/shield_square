@@ -92,7 +92,7 @@ module Ss2
 			end
 		end
 		
-		if cookies['__uzma']!="" and (cookies['__uzma'].to_s).length > 3
+		if is_cookie_set(cookies['__uzma']) && is_cookie_set(cookies['__uzmb']) && is_cookie_set(cookies['__uzmc']) && is_cookie_set(cookies['__uzmd'])
 			shieldsquare_uzmc=0
 			shieldsquare_uzmc= cookies['__uzmc']
 			shieldsquare_uzmc=shieldsquare_uzmc[shieldsquare_e..shieldsquare_e+1]
@@ -195,6 +195,10 @@ module Ss2
 		end
 		response
 	end	
+
+	def self.is_cookie_set(cookie)
+		!cookie.nil? && !cookie.empty?
+	end
 
 	def self.shieldsquare_post_sync(url, payload, timeout)
 		# Sendind the Data to the ShieldSquare Server
